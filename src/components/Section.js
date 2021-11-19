@@ -20,7 +20,7 @@ function Section(props) {
                            <a href="/login"><LeftButton>{props.leftBtnText}</LeftButton></a>
                         )}
                         {props.rightBtnText && (
-                           <a href="#"> <RightButton>{props.rightBtnText}</RightButton></a>
+                           <a href="/cadastro"> <RightButton>{props.rightBtnText}</RightButton></a>
                         )}
                     </ButtonGroup>
                 </Fade>

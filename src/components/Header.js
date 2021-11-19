@@ -20,7 +20,7 @@ function Header() {
                     <Menu>
                         <a href="/">Home</a>
                         <a href="/login">Login</a>
-                        <a href="#">Cadastrar-se</a>
+                        <a href="/cadastro">Cadastrar-se</a>
                     </Menu>
 
                     <HamburguerWrap>
@@ -37,7 +37,7 @@ function Header() {
                         </CloseWrapper>
                         <li>
                             <a href="/login">Login</a>
-                            <a href="#">Cadastrar-se</a>
+                            <a href="/cadastro">Cadastrar-se</a>
                         </li>
                     </BurguerNav>
                 </div>
