@@ -1,23 +1,35 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Fade from "react-reveal/Fade"
-
+import axios from "axios"
 import redirectUserIfNotLogged from "../utils/redirectUserIfNotLogged"
 
-
-
-function LogadoSection(props) {      
-    
+function LogadoSection(props) {
     redirectUserIfNotLogged("/interface")
+
+    const id = localStorage.getItem("id")
+
+    async function userInfo() {
+        await axios
+            .get(`http://localhost:5000/usuarios/${id}`, {
+                headers: { "x-access-token": localStorage.getItem("token") },
+            })
+            .then(
+
+            )
+    }
+
+    console.log(userInfo)
+    // const userInfoData = getUserInfo()
 
     return (
         <Wrap bgImage={props.backgroundImg}>
             <Fade bottom>
                 <ItemText titleColor={props.titleColor}>
                     <h1>
-                        {" "}
-                        Bem vindo à Plataforma DevShelter, NOME(PROPS VINDO DO
-                        INTERFACELOGADO) <br /> Este é o seu perfil:
+                        Bem vindo à Plataforma DevShelter,{userInfo}
+                        {console.log()}
+                        <br /> Este é o seu perfil:
                     </h1>
                 </ItemText>
             </Fade>
@@ -25,19 +37,35 @@ function LogadoSection(props) {
                 <Perfil>
                     <InfoBox>
                         <InfoName>Nome</InfoName>
-                        <InfoText>nomeProps</InfoText>
+                        {/* <InfoText>{nome}</InfoText> */}
                     </InfoBox>
                     <InfoBox>
                         <InfoName>Login</InfoName>
-                        <InfoText>loginProps</InfoText>
+                        {/* <InfoText>{login}</InfoText> */}
                     </InfoBox>
                     <InfoBox>
                         <InfoName>Email</InfoName>
-                        <InfoText>emailProps</InfoText>
+                        {/* <InfoText>{email}</InfoText> */}
+                    </InfoBox>
+                    <InfoBox>
+                        <InfoName>CPF</InfoName>
+                        {/* <InfoText>{habilidades}</InfoText> */}
                     </InfoBox>
                     <InfoBox>
                         <InfoName>Habilidades</InfoName>
-                        <InfoText>habilidadesProps</InfoText>
+                        {/* <InfoText>{habilidades}</InfoText> */}
+                    </InfoBox>
+                    <InfoBox>
+                        <InfoName>Habilidades</InfoName>
+                        {/* <InfoText>{habilidades}</InfoText> */}
+                    </InfoBox>
+                    <InfoBox>
+                        <InfoName>Habilidades</InfoName>
+                        {/* <InfoText>{habilidades}</InfoText> */}
+                    </InfoBox>
+                    <InfoBox>
+                        <InfoName>Habilidades</InfoName>
+                        {/* <InfoText>{habilidades}</InfoText> */}
                     </InfoBox>
                 </Perfil>
             </Painel>
@@ -140,7 +168,7 @@ const Painel = styled.div`
 `
 
 const Perfil = styled.div`
-    color: GREEN;
+    color: white;
     background-color: pink;
     width: auto;
     display: flex;

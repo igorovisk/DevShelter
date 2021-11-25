@@ -7,7 +7,7 @@ import LoginSection from "../components/LoginSection"
 function Login() {
     return (
         <Container>
-            <Header />
+            <Header loginBtn= "Login"  cadastroBtn= "Cadastro"/>
             <LoginSection
                 backgroundImg="login-background.jpg"
                 title="DevShelter"

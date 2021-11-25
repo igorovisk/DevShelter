@@ -5,7 +5,7 @@ import * as yup from "yup"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 
 const handleClickRegister = (values) => {
-    
+    console.log(values)
 }
 
 const validationCadastro = yup.object().shape({
@@ -110,7 +110,7 @@ function CadastroSection(props) {
                             <ErrorMessage
                                 component="p"
                                 name="dataDeNascimento"
-                                className="Deve ser uma data (ano-mes-dia)"
+                                className="form-error"
                             ></ErrorMessage>
                         </div>
                         <div className="login-form-group">
@@ -195,8 +195,9 @@ const Wrap = styled.div`
     }
 
     .form-error {
-        color: red;
+        color: white;
         padding-left: 20px;
+        text-shadow: 3px 3px 3px red;
     }
 `
 const Title = styled.div`
@@ -204,7 +205,7 @@ const Title = styled.div`
     font-weight: 700;
     text-transform: uppercase;
     color: ${(props) => props.titleColor};
-    padding-top: 20vh;
+    padding-top: 23vh;
     text-align: center;
 `
 

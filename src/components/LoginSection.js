@@ -23,6 +23,7 @@ const handleClickLogin = async function (values) {
         .then((user) => {            
             window.localStorage.setItem("login", user.data.usuario)
             window.localStorage.setItem("token", user.data.token)
+            window.localStorage.setItem("id", user.data.id)
             
                      
             if (user.status === 200) {
@@ -85,7 +86,7 @@ export default LoginSection
 
 const Wrap = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

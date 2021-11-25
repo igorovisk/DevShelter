@@ -7,7 +7,7 @@ function Home() {
     return (
         
         <Container>
-           <Header />
+           <Header  loginBtn= "Login"  cadastroBtn= "Cadastro"/>
             <Section
                 title="DevShelter"
                 titleColor="white"

@@ -6,6 +6,12 @@ import { Close as CloseIcon } from "@material-ui/icons"
 function Header(props) {
     const [burguerStatus, setBurguerStatus] = useState(false)
 
+    function logout () {
+        
+        localStorage.setItem("token","")
+        console.log(localStorage.getItem("token"))
+    }
+
     return (
         <div>
             <Container>
@@ -19,8 +25,9 @@ function Header(props) {
                 <div>
                     <Menu>
                         <a href="/">Home</a>
-                        <a href="/login">Login</a>
-                        <a href="/cadastro">Cadastrar-se</a>
+                        {props.loginBtn && (<a href="/login">{props.loginBtn}</a>)}
+                        {props.cadastroBtn && (<a href="/cadastro">{props.cadastroBtn}</a>)}
+                        {props.logoutBtn && (<a onClick= {logout} href="/">{props.logoutBtn}</a>)}
                     </Menu>
 
                     <HamburguerWrap>
@@ -76,7 +83,7 @@ const Menu = styled.nav`
     font-weight: 600;
   
     a{
-        display: ${(props) => props.displayMenuLink};
+        // display: ${(props) => props.displayMenuLink};
         padding: 0px 15px;
         &:hover{
             color: green; 
