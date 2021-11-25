@@ -4,7 +4,9 @@ import Fade from "react-reveal/Fade"
 import * as yup from "yup"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 
-const handleClickRegister = (values) => console.log(values)
+const handleClickRegister = (values) => {
+    
+}
 
 const validationCadastro = yup.object().shape({
     nome: yup.string().required("Campo obrigatório"),
@@ -30,7 +32,7 @@ function CadastroSection(props) {
             <Fade bottom>
                 <Title titleColor={props.titleColor}>Cadastre-se</Title>
 
-                <Formik                    
+                <Formik
                     initialValues={{}}
                     onSubmit={handleClickRegister}
                     validationSchema={validationCadastro}
@@ -137,7 +139,7 @@ export default CadastroSection
 
 const Wrap = styled.div`
     width: 100vw;
-    height: 140vh;
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -151,7 +153,7 @@ const Wrap = styled.div`
     .placeholder {
         padding-left: 10px;
     }
-   
+
     .login-form {
         margin-top: 15px;
         text-align: center;

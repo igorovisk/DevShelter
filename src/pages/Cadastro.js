@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import Header from "./Header"
-import CadastroSection from "./CadastroSection"
+import Header from "../components/Header"
+import CadastroSection from "../components/CadastroSection"
 
 function Cadastro() {
     return (

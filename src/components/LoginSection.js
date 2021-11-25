@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Fade from "react-reveal/Fade"
 import * as yup from "yup"
 import { Formik, Form, Field, ErrorMessage } from "formik"
+import axios from "axios"
 
 const validationLogin = yup.object().shape({
     login: yup.string().required("Campo obrigatório"),
@@ -12,7 +13,26 @@ const validationLogin = yup.object().shape({
         .required("Campo obrigatório"),
 })
 
-const handleClickLogin = (values) => console.log(values)
+const handleClickLogin = async function (values) {
+
+    await axios
+        .post("http://localhost:5000/autenticacao/login", {
+            login: values.login,
+            password: values.password,
+        })
+        .then((user) => {            
+            window.localStorage.setItem("login", user.data.usuario)
+            window.localStorage.setItem("token", user.data.token)
+            
+                     
+            if (user.status === 200) {
+                window.location.href = "interface"
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+}
 
 function LoginSection(props) {
     return (
@@ -40,6 +60,7 @@ function LoginSection(props) {
                         </div>
                         <div className="login-form-group">
                             <Field
+                                type="password"
                                 name="password"
                                 className="form-field"
                                 placeholder="Password"
@@ -68,7 +89,7 @@ const Wrap = styled.div`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: ${(props) => `url("/images/${props.bgImage}")`};  
+    background-image: ${(props) => `url("/images/${props.bgImage}")`};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,13 +100,10 @@ const Wrap = styled.div`
         margin-top: 35px;
         text-align: center;
         padding: 10px;
-        
     }
-    .login-form-group {
-        
-    }
+
     .form-field {
-        border: 1px solid gray;        
+        border: 1px solid gray;
         margin-bottom: 0px;
         height: 40px;
         width: 256px;
@@ -99,7 +117,7 @@ const Wrap = styled.div`
         width: 256px;
         align-items: center;
         justify-content: center;
-        border-radius: 100px;        
+        border-radius: 100px;
         text-transform: uppercase;
         font-size: 12px;
         font-weight: bold;
@@ -117,7 +135,7 @@ const Wrap = styled.div`
         }
     }
 
-    .form-error{
+    .form-error {
         color: red;
         padding-left: 20px;
     }

@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Menu as MenuIcon } from "@material-ui/icons"
 import { Close as CloseIcon } from "@material-ui/icons"
 
-function Header() {
+function Header(props) {
     const [burguerStatus, setBurguerStatus] = useState(false)
 
     return (
@@ -76,6 +76,7 @@ const Menu = styled.nav`
     font-weight: 600;
   
     a{
+        display: ${(props) => props.displayMenuLink};
         padding: 0px 15px;
         &:hover{
             color: green; 
