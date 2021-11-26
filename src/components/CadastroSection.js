@@ -3,9 +3,36 @@ import styled from "styled-components"
 import Fade from "react-reveal/Fade"
 import * as yup from "yup"
 import { Formik, Form, Field, ErrorMessage } from "formik"
+import axios from "axios"
 
-const handleClickRegister = (values) => {
-    console.log(values)
+// function getQueryString(data = {}) {
+//     return Object.entries(data)
+//       .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+//       .join('&');
+//   }
+
+const handleClickRegister = async function (values) {
+    const data = {
+        nome: values.nome,
+        cpf: values.cpf,
+        login: values.login,
+        password: values.password,
+        dataDeNascimento: values.dataDeNascimento,
+        email: values.email,
+    }
+
+    await axios
+        .post("http://localhost:5000/usuarios", JSON.stringify(data), {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then(function (user) {
+            console.log(user)
+        })
+        .catch(function (err) {
+            console.error(err)
+        })
 }
 
 const validationCadastro = yup.object().shape({
@@ -19,9 +46,6 @@ const validationCadastro = yup.object().shape({
         .string()
         .min(6)
         .required("Campo obrigatório, mínimo 6 caracteres"),
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref("password"), null], "A senhas não são iguais"),
     dataDeNascimento: yup.date().notRequired(),
     email: yup.string().email().required(),
 })
@@ -91,18 +115,6 @@ function CadastroSection(props) {
 
                         <div className="login-form-group">
                             <Field
-                                name="confirmPassword"
-                                className="form-field"
-                                placeholder="Confirme seu password"
-                            ></Field>
-                            <ErrorMessage
-                                component="p"
-                                name="password"
-                                className="form-error"
-                            ></ErrorMessage>
-                        </div>
-                        <div className="login-form-group">
-                            <Field
                                 name="dataDeNascimento"
                                 className="form-field"
                                 placeholder="Data de Nascimento (Ano/Mês/dia)"
@@ -139,7 +151,6 @@ export default CadastroSection
 
 const Wrap = styled.div`
     width: 100vw;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

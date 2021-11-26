@@ -20,5 +20,6 @@ function Login() {
 export default Login
 
 const Container = styled.div`
-    width: 100vw;  
+    width: 100vw; 
+     
 `

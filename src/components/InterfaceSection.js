@@ -1,33 +1,38 @@
 import React, { useState } from "react"
-import styled from "styled-components"
+import styled, { useTheme } from "styled-components"
 import Fade from "react-reveal/Fade"
 import axios from "axios"
 import redirectUserIfNotLogged from "../utils/redirectUserIfNotLogged"
+import { useEffect } from "react"
 
 function LogadoSection(props) {
     redirectUserIfNotLogged("/interface")
+    const [user, setUser] = useState("")
 
     const id = localStorage.getItem("id")
 
-    async function userInfo() {
-        await axios
+    function getUserInfo() {
+        axios
             .get(`http://localhost:5000/usuarios/${id}`, {
                 headers: { "x-access-token": localStorage.getItem("token") },
             })
-            .then(
-
-            )
+            .then((result) => {
+                console.log(result)
+                setUser(result.data)
+                
+            })
     }
 
-    console.log(userInfo)
-    // const userInfoData = getUserInfo()
+    useEffect(() => {
+        getUserInfo()
+    }, [])
 
     return (
         <Wrap bgImage={props.backgroundImg}>
             <Fade bottom>
                 <ItemText titleColor={props.titleColor}>
                     <h1>
-                        Bem vindo à Plataforma DevShelter,{userInfo}
+                        Bem vindo à Plataforma DevShelter, {user.nome}
                         {console.log()}
                         <br /> Este é o seu perfil:
                     </h1>
@@ -37,36 +42,29 @@ function LogadoSection(props) {
                 <Perfil>
                     <InfoBox>
                         <InfoName>Nome</InfoName>
-                        {/* <InfoText>{nome}</InfoText> */}
+                        <InfoText>{user.nome}</InfoText>
                     </InfoBox>
                     <InfoBox>
                         <InfoName>Login</InfoName>
-                        {/* <InfoText>{login}</InfoText> */}
+                        <InfoText>{user.login}</InfoText>
                     </InfoBox>
                     <InfoBox>
                         <InfoName>Email</InfoName>
-                        {/* <InfoText>{email}</InfoText> */}
+                        <InfoText>{user.email}</InfoText>
                     </InfoBox>
                     <InfoBox>
                         <InfoName>CPF</InfoName>
-                        {/* <InfoText>{habilidades}</InfoText> */}
+                        <InfoText>{user.cpf}</InfoText>
+                    </InfoBox>
+                    <InfoBox>
+                        <InfoName>Data de Nascimento</InfoName>
+                        <InfoText>{user.dataDeNascimento}</InfoText>
                     </InfoBox>
                     <InfoBox>
                         <InfoName>Habilidades</InfoName>
-                        {/* <InfoText>{habilidades}</InfoText> */}
+                        <InfoText>{user.habilidades}</InfoText>
                     </InfoBox>
-                    <InfoBox>
-                        <InfoName>Habilidades</InfoName>
-                        {/* <InfoText>{habilidades}</InfoText> */}
-                    </InfoBox>
-                    <InfoBox>
-                        <InfoName>Habilidades</InfoName>
-                        {/* <InfoText>{habilidades}</InfoText> */}
-                    </InfoBox>
-                    <InfoBox>
-                        <InfoName>Habilidades</InfoName>
-                        {/* <InfoText>{habilidades}</InfoText> */}
-                    </InfoBox>
+                   
                 </Perfil>
             </Painel>
             <Buttons>
@@ -98,7 +96,7 @@ export default LogadoSection
 
 const Wrap = styled.div`
     width: 100vw;
-    height: 100%;
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -123,7 +121,6 @@ const Wrap = styled.div`
         cursor: pointer;
         margin: 8px;
         border: none;
-        margin-top: 80px;
 
         &:hover {
             color: green !important;
@@ -151,11 +148,9 @@ const ItemText = styled.div`
 `
 const ButtonGroup = styled.div`
     display: flex;
-
+    margin-top: 50px;
     @media (max-width: 768px) {
         flex-direction: column;
-
-        margin-botton: 30px;
     }
 `
 
@@ -165,12 +160,15 @@ const Buttons = styled.div`
 `
 const Painel = styled.div`
     margin-top: 20px;
+    
 `
 
 const Perfil = styled.div`
-    color: white;
-    background-color: pink;
-    width: auto;
+    color: black;
+    border: 2px solid #052106;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    width: 50vw;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -180,9 +178,14 @@ const Perfil = styled.div`
 const InfoBox = styled.div`
     display: flex;
     padding: 5px;
+    
     justify-content: space-between;
+    border: 1px solid #052106;
+    border-radius: 5px;
 `
 const InfoName = styled.div`
+
+    color: black;
     text-transform: uppercase;
     font-weight: 700;
     padding: 5px;
