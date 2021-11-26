@@ -105,10 +105,12 @@ function CadastroSection(props) {
                                 name="password"
                                 className="form-field"
                                 placeholder="Password"
+                                type="password"
                             ></Field>
                             <ErrorMessage
                                 component="p"
                                 name="password"
+                               
                                 className="form-error"
                             ></ErrorMessage>
                         </div>
